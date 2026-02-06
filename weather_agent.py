@@ -1,6 +1,4 @@
 import os
-import gradio as gr
-from typing import TypedDict
 # from langchain.chat_models import init_chat_model
 from langchain_openai import ChatOpenAI
 from dataclasses import dataclass
