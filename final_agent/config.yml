@@ -1,0 +1,32 @@
+directories:
+  base_dir: "." # Thư mục gốc dự án
+  markdown_dir: "markdown_docs"
+  parent_store_path: "parent_store"
+  qdrant_db_path: "qdrant_db"
+
+# --- Qdrant & RAG Configuration ---
+rag:
+  child_collection: "document_child_chunks"
+  sparse_vector_name: "sparse"
+  child_chunk_size: 500
+  child_chunk_overlap: 100
+  min_parent_size: 2000
+  max_parent_size: 4000
+  headers_to_split_on:
+    - ["#", "H1"]
+    - ["##", "H2"]
+    - ["###", "H3"]
+
+# --- Model Configuration ---
+models:
+  dense_model: "sentence-transformers/all-mpnet-base-v2"
+  sparse_model: "Qdrant/bm25"
+  llm_model: "qwen3-8b-fp8" # Lựa chọn tốt cho vLLM năm 2026
+  llm_temperature: 0
+
+# --- Agent Configuration ---
+agent:
+  max_tool_calls: 8
+  max_iterations: 10
+  base_token_threshold: 2000
+  token_growth_factor: 0.9
