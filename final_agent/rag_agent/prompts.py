@@ -44,8 +44,9 @@ Rules:
    - Each sub-query must remain semantically equivalent to its part of the original
    - Do not expand, enrich, or reinterpret the meaning
 
-5. Failure handling:
-   - If the query intent is unclear or unintelligible, mark as "unclear"
+5. Social/Casual handling:
+   - If the query is a greeting (hi, hello), thank you, or off-topic, do NOT rewrite it for retrieval.
+   - Instead, output the exact word "SOCIAL_RESPONSE".
 
 Input:
 - conversation_summary: A concise summary of prior conversation

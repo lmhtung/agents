@@ -29,7 +29,7 @@ class RAGSystem:
             base_url="http://100.67.127.53:8000/v1",
             api_key="sk-test",
             temperature=cfg["models"]["llm_temperature"],
-        
+            timeout= cfg["models"]["llm_timeout"],
         )
         tools = ToolFactory(collection).create_tools()
         self.agent_graph = create_agent_graph(llm, tools)

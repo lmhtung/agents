@@ -37,6 +37,16 @@ def rewrite_query(state: State, llm):
     llm_with_structure = llm.with_config(temperature=0.1).with_structured_output(QueryAnalysis)
     response = llm_with_structure.invoke([SystemMessage(content=get_rewrite_query_prompt()), HumanMessage(content=context_section)])
 
+    # 5. BÂY GIỜ MỚI KIỂM TRA LOGIC (Sau khi đã có response)
+    
+    # Kiểm tra nếu LLM trả về tín hiệu SOCIAL_RESPONSE (nếu bạn dùng nội dung text)
+    # Lưu ý: Vì dùng structured_output, hãy đảm bảo QueryAnalysis có trường content hoặc xử lý phù hợp
+    if hasattr(response, 'content') and response.content and "SOCIAL_RESPONSE" in response.content:
+        return {
+            "questionIsClear": False, 
+            "messages": [AIMessage(content="Chào bạn! Tôi là trợ lý chuyên gia về tài liệu. Bạn cần tôi tìm kiếm thông tin gì không?")]
+        }
+    
     if response.questions and response.is_clear:
         delete_all = [RemoveMessage(id=m.id) for m in state["messages"] if not isinstance(m, SystemMessage)]
         return {"questionIsClear": True, "messages": delete_all, "originalQuery": last_message.content, "rewrittenQuestions": response.questions}
