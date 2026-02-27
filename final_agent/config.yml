@@ -21,7 +21,7 @@ rag:
 models:
   dense_model: "sentence-transformers/all-mpnet-base-v2"
   sparse_model: "Qdrant/bm25"
-  llm_model: "qwen3-8b-fp8" # Lựa chọn tốt cho vLLM năm 2026
+  llm_model: "qwen3-8b-fp8" 
   llm_temperature: 0.2
   llm_timeout: 60
 
